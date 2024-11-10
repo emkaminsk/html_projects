@@ -28,9 +28,6 @@ body {
     background-color: white;
     padding: 2rem;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    height: 100vh;
-    position: sticky;
-    top: 0;
 }
 
 .menu {
@@ -105,16 +102,17 @@ p {
 
     .sidebar {
         position: fixed;
-        left: -100%;
+        transform: translateX(-100%);
         top: 0;
-        height: 100%;
-        transition: left 0.3s ease;
+        width: var(--sidebar-width);
+        height: 100vh;
+        transition: transform 0.3s ease;
         z-index: 1000;
         background: white;
     }
 
     .sidebar.active {
-        left: 0;
+        transform: translateX(0);
     }
 
     .container {
@@ -125,5 +123,6 @@ p {
         margin-left: 0;
         padding: 1rem;
         padding-top: 4rem;
+        width: 100%;
     }
 }
