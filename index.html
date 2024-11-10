@@ -16,32 +16,6 @@
             <p>Feel free to explore the different sections to learn more about me and my work.</p>
         </main>
     </div>
-    <script>
-        // Load sidebar content
-        fetch('sidebar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('sidebar').innerHTML = data;
-                // Re-initialize event listeners for the sidebar
-                initializeSidebar();
-            });
-
-        function initializeSidebar() {
-            const menuToggle = document.getElementById('menuToggle');
-            const projectsToggle = document.querySelector('.projects-toggle');
-            const submenu = document.querySelector('.submenu');
-
-            menuToggle.addEventListener('click', () => {
-                document.querySelector('.sidebar').classList.toggle('active');
-            });
-
-            projectsToggle.addEventListener('click', (e) => {
-                e.preventDefault();
-                projectsToggle.classList.toggle('active');
-                submenu.classList.toggle('active');
-            });
-        }
-    </script>
     <script src="script.js"></script>
 </body>
 </html> 
