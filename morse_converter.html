@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Text to Morse Code Converter</title>
+  <title>Bidirectional Morse Code Converter</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -35,13 +35,20 @@
       font-size: 24px;
       font-weight: bold;
     }
+
+    .label {
+      margin: 10px 0;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <h1>Text to Morse Code Converter</h1>
+  <h1>Bidirectional Morse Code Converter</h1>
   
   <div class="converter">
-    <textarea id="text-input" placeholder="Enter text here..."></textarea>
+    <div class="label">Text Input:</div>
+    <textarea id="text-input" placeholder="Enter text here or Morse code (. and -)..."></textarea>
+    <div class="label">Conversion Result:</div>
     <div id="morse-output"></div>
   </div>
   
@@ -59,10 +66,44 @@
       '8': '---..', '9': '----.', ' ': '/'
     };
 
+    // Create reverse lookup object for Morse to text conversion
+    const reverseMorseCode = Object.fromEntries(
+      Object.entries(morseCode).map(([key, value]) => [value, key])
+    );
+
+    function isMorseCode(text) {
+      // Check if the input consists only of ., -, spaces, and forward slashes
+      return /^[.\- /]*$/.test(text.trim());
+    }
+
+    function morseToText(morse) {
+      return morse
+        .split(' ')
+        .map(code => {
+          if (code === '/') return ' ';
+          return reverseMorseCode[code] || code;
+        })
+        .join('');
+    }
+
+    function textToMorse(text) {
+      return text
+        .toUpperCase()
+        .split('')
+        .map(char => morseCode[char] || char)
+        .join(' ');
+    }
+
     textInput.addEventListener('input', () => {
-      const text = textInput.value.toUpperCase();
-      const morse = text.split('').map(char => morseCode[char] || char).join(' ');
-      morseOutput.textContent = morse;
+      const input = textInput.value;
+      
+      if (isMorseCode(input)) {
+        // Convert from Morse to text
+        morseOutput.textContent = morseToText(input);
+      } else {
+        // Convert from text to Morse
+        morseOutput.textContent = textToMorse(input);
+      }
     });
   </script>
 </body>
