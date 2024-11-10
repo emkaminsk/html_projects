@@ -28,6 +28,9 @@ body {
     background-color: white;
     padding: 2rem;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    position: sticky;
+    top: 0;
 }
 
 .menu {
@@ -70,6 +73,29 @@ p {
     display: none;
     font-size: 1.5rem;
     cursor: pointer;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1001;
+    background: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.submenu {
+    display: none;
+    list-style: none;
+    padding-left: 1rem;
+    margin-top: 0.5rem;
+}
+
+.submenu li {
+    margin-bottom: 0.5rem;
+}
+
+.projects-toggle.active + .submenu {
+    display: block;
 }
 
 @media (max-width: 768px) {
@@ -79,11 +105,12 @@ p {
 
     .sidebar {
         position: fixed;
-        left: -var(--sidebar-width);
+        left: -100%;
         top: 0;
         height: 100%;
         transition: left 0.3s ease;
         z-index: 1000;
+        background: white;
     }
 
     .sidebar.active {
@@ -97,19 +124,6 @@ p {
     .content {
         margin-left: 0;
         padding: 1rem;
+        padding-top: 4rem;
     }
 }
-
-.submenu {
-    display: none; /* Hide submenu by default */
-    list-style: none;
-    padding-left: 1rem; /* Indent submenu */
-}
-
-.submenu li {
-    margin-bottom: 0.5rem; /* Space between submenu items */
-}
-
-.projects-toggle.active + .submenu {
-    display: block; /* Show submenu when active */
-} 
