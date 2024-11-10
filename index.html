@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar" id="sidebar"></nav>
+        <main class="content">
+            <h1>Welcome to My Website</h1>
+            <p>Hello! I'm Marcin Kamiński, and this is my personal website. I'm passionate about technology and creating meaningful solutions.</p>
+            <p>Feel free to explore the different sections to learn more about me and my work.</p>
+        </main>
+    </div>
+    <script>
+        // Load sidebar content
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+                // Re-initialize event listeners for the sidebar
+                initializeSidebar();
+            });
+
+        function initializeSidebar() {
+            const menuToggle = document.getElementById('menuToggle');
+            const projectsToggle = document.querySelector('.projects-toggle');
+            const submenu = document.querySelector('.submenu');
+
+            menuToggle.addEventListener('click', () => {
+                document.querySelector('.sidebar').classList.toggle('active');
+            });
+
+            projectsToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                projectsToggle.classList.toggle('active');
+                submenu.classList.toggle('active');
+            });
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html> 
