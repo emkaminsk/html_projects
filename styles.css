@@ -102,17 +102,24 @@ p {
 
     .sidebar {
         position: fixed;
-        transform: translateX(-100%);
+        left: -100%;
         top: 0;
         width: var(--sidebar-width);
         height: 100vh;
-        transition: transform 0.3s ease;
+        transition: left 0.3s ease;
         z-index: 1000;
         background: white;
+        visibility: visible;
     }
 
     .sidebar.active {
-        transform: translateX(0);
+        left: 0;
+        visibility: visible;
+    }
+
+    .sidebar .menu {
+        opacity: 1;
+        visibility: visible;
     }
 
     .container {
@@ -124,5 +131,12 @@ p {
         padding: 1rem;
         padding-top: 4rem;
         width: 100%;
+    }
+
+    .sidebar.active .menu,
+    .sidebar.active .submenu {
+        display: block;
+        visibility: visible;
+        opacity: 1;
     }
 }
