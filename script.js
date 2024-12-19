@@ -14,16 +14,15 @@ function initializeSidebar() {
     const projectsToggle = document.querySelector('.projects-toggle');
     const submenu = document.querySelector('.submenu');
 
-    // Ensure sidebar starts closed on mobile
-    if (window.innerWidth <= 768) {
-        sidebar.classList.remove('active');
-        projectsToggle.classList.remove('active');
-        submenu.classList.remove('active');
-    }
+    // Add initial state class to sidebar
+    sidebar.classList.add('sidebar-closed');
 
     menuToggle.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent event from bubbling up
+        e.stopPropagation();
         sidebar.classList.toggle('active');
+        // Toggle aria-expanded for accessibility
+        menuToggle.setAttribute('aria-expanded', 
+            sidebar.classList.contains('active').toString());
     });
 
     projectsToggle.addEventListener('click', (e) => {
@@ -56,12 +55,16 @@ function initializeSidebar() {
         }
     });
 
-    // Handle window resize
+    // Update resize handler for smoother transitions
+    let resizeTimer;
     window.addEventListener('resize', () => {
-        if (window.innerWidth <= 768) {
-            sidebar.classList.remove('active');
-            projectsToggle.classList.remove('active');
-            submenu.classList.remove('active');
-        }
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('active');
+                projectsToggle.classList.remove('active');
+                submenu.classList.remove('active');
+            }
+        }, 250); // Debounce resize events
     });
 } 

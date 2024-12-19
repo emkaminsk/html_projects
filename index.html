@@ -3,17 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Personal Website</title>
+    <title>Marcin Kamiński | Personal Website</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <nav class="sidebar" id="sidebar"></nav>
         <main class="content">
-            <h1>Welcome to My Website</h1>
-            <p>Hello! I'm Marcin Kamiński, and this is my personal website. I'm passionate about technology and creating meaningful solutions.</p>
-            <p>Feel free to explore the different sections to learn more about me and my work.</p>
+            <header class="hero">
+                <h1>Marcin Kamiński</h1>
+                <p class="subtitle">Senior Consultant & Product Owner</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/marcinkaminski/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/emkaminsk" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+            </header>
+
+            <section class="about">
+                <h2>About Me</h2>
+                <div class="about-content">
+                    <div class="profile-text">
+                        <p>Hello! I'm passionate about technology and creating meaningful solutions.</p>
+                        <p>As a Senior Consultant at Sii Poland and Product Owner since 2017, I bring extensive experience in:</p>
+                        <ul>
+                            <li>Product Management & Discovery</li>
+                            <li>Business Analysis</li>
+                            <li>Team Leadership (since 2009)</li>
+                            <li>Executive MBA graduate (Aalto University & WSB Merito)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="ventures">
+                <h2>Professional Ventures</h2>
+                <div class="venture-card">
+                    <h3>MK Konsultacje</h3>
+                    <p>Founder of <a href="https://mkhome.byst.re" target="_blank">MK Konsultacje</a>, providing expert consulting and software development services.</p>
+                </div>
+            </section>
+
+            <section class="interests">
+                <h2>Personal Growth</h2>
+                <div class="interests-grid">
+                    <div class="interest-item">
+                        <i class="fas fa-language"></i>
+                        <p>Spanish Language</p>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fab fa-python"></i>
+                        <p>Python Programming</p>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-robot"></i>
+                        <p>AI Trends</p>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-meditation"></i>
+                        <p>Vipassana Meditation</p>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
     <script src="script.js"></script>
