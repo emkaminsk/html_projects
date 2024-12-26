@@ -135,17 +135,58 @@ h2 {
 }
 
 .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 250px;
+    background: white;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    z-index: 1000;
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
+    padding-top: 4rem;
 }
 
 .sidebar.active {
     transform: translateX(0);
 }
 
+/* Desktop styles */
 @media (min-width: 769px) {
+    .container {
+        padding-left: 250px;
+    }
+    
     .sidebar {
         transform: translateX(0);
+    }
+    
+    #menuToggle {
+        display: none;
+    }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 0;
+    }
+    
+    #menuToggle {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 1001;
+        background: white;
+        border: none;
+        padding: 0.5rem 0.75rem;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        cursor: pointer;
+        font-size: 1.5rem;
+        display: block;
+        color: var(--primary-color);
     }
 }
 
@@ -174,4 +215,62 @@ h2 {
         gap: 1rem;
         padding: 1rem;
     }
+}
+
+/* Sidebar menu styling */
+.sidebar .navbar-nav {
+    padding: 0.5rem;
+}
+
+.sidebar .navbar-nav li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar .navbar-nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    display: block;
+    padding: 0.25rem 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.sidebar .navbar-nav a:hover {
+    color: var(--secondary-color);
+}
+
+/* Submenu styling */
+.sidebar .submenu {
+    list-style: none;
+    padding-left: 1rem;
+    margin-top: 0.25rem;
+}
+
+.sidebar .submenu li {
+    margin-bottom: 0.25rem;
+}
+
+.sidebar .submenu a {
+    font-size: 0.95em;
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+.sidebar .submenu a:hover {
+    opacity: 1;
+}
+
+.project-item.section {
+    margin-bottom: 2rem;
+}
+
+.project-item h2 {
+    margin-bottom: 1.5rem;
+}
+
+.project-item p {
+    margin-bottom: 1.5rem;
+}
+
+.project-item .btn {
+    margin-top: 0.5rem;
 }

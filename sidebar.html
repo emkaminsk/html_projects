@@ -1,17 +1,29 @@
-<div class="menu-toggle" id="menuToggle">☰</div>
-<ul class="menu">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="https://mkcv.byst.re">Personal CV</a></li>
-    <li><a href="https://emkaminsk.github.io/Sciaga_vim/">VIM manual in Polish</a></li>
-    <li><a href="https://diceroll.byst.re/">Dice Roll App</a></li>
-    <li><a href="https://game2048.byst.re/">2048 game</a></li>
-    <li>
-        <a href="#" class="projects-toggle">Projects</a>
-        <ul class="submenu">
-            <li><a href="json_prettifier.html">JSON Prettifier</a></li>
-            <li><a href="qr_code_generator.html">QR Code Generator</a></li>
-            <li><a href="morse_converter.html">Morse Code Converter</a></li>
+<nav class="navbar navbar-expand-md">
+    <button class="navbar-toggler" id="menuToggle" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false">
+        ☰
+    </button>
+    <div class="collapse navbar-collapse" id="sidebarMenu">
+        <ul class="navbar-nav flex-column">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="https://mkcv.byst.re">Curriculum Vitae</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li>
+                <a href="utilities.html" class="utilities-toggle">Utilities</a>
+                <ul class="submenu">
+                    <li><a href="https://emkaminsk.github.io/Sciaga_vim/">VIM manual</a></li>
+                    <li><a href="https://diceroll.byst.re/">Dice Roll</a></li>
+                    <li><a href="https://game2048.byst.re/">2048 Game</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="projects.html" class="projects-toggle">Projects</a>
+                <ul class="submenu">
+                    <li><a href="json_prettifier.html">JSON Prettifier</a></li>
+                    <li><a href="qr_code_generator.html">QR Code Generator</a></li>
+                    <li><a href="morse_converter.html">Morse Code Converter</a></li>
+                </ul>
+            </li>
+            <li><a href="mailto:emkaminsk@gmail.com">Contact</a></li>
         </ul>
-    </li>
-    <li><a href="mailto:emkaminsk@gmail.com">Contact</a></li>
-</ul> 
+    </div>
+</nav> 

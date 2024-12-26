@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Personal Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <!-- Sidebar will be loaded here -->
+        </div>
+        <div class="content">
+            <h1>Projects</h1>
+            <div class="project-list">
+                <div class="project-item section">
+                    <h2>JSON Prettifier</h2>
+                    <p>Format and validate JSON data with this easy-to-use tool.</p>
+                    <a href="json_prettifier.html" class="btn btn-primary">Try it</a>
+                </div>
+                <div class="project-item section">
+                    <h2>QR Code Generator</h2>
+                    <p>Generate QR codes for any text or URL instantly.</p>
+                    <a href="qr_code_generator.html" class="btn btn-primary">Try it</a>
+                </div>
+                <div class="project-item section">
+                    <h2>Morse Code Converter</h2>
+                    <p>Convert text to Morse code and vice versa.</p>
+                    <a href="morse_converter.html" class="btn btn-primary">Try it</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Load sidebar
+            $('.sidebar').load('sidebar.html', function() {
+                // Highlight current page in menu
+                $('a[href="projects.html"]').addClass('active');
+                
+                // Initialize submenu functionality
+                $('.projects-toggle').click(function(e) {
+                    e.preventDefault();
+                    $(this).siblings('.submenu').slideToggle();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

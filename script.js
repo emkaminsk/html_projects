@@ -5,66 +5,50 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
             initializeSidebar();
-        });
+        })
+        .catch(error => console.error('Error loading sidebar:', error));
 });
 
 function initializeSidebar() {
-    const menuToggle = document.getElementById('menuToggle');
+    const menuToggle = document.querySelector('#menuToggle');
     const sidebar = document.querySelector('.sidebar');
-    const projectsToggle = document.querySelector('.projects-toggle');
-    const submenu = document.querySelector('.submenu');
+    
+    // Ensure elements exist before adding listeners
+    if (!menuToggle || !sidebar) {
+        console.error('Required elements not found');
+        return;
+    }
 
-    // Add initial state class to sidebar
-    sidebar.classList.add('sidebar-closed');
-
+    // Handle menu toggle click
     menuToggle.addEventListener('click', (e) => {
+        e.preventDefault();
         e.stopPropagation();
         sidebar.classList.toggle('active');
-        // Toggle aria-expanded for accessibility
-        menuToggle.setAttribute('aria-expanded', 
-            sidebar.classList.contains('active').toString());
+        
+        // Update aria-expanded state
+        const isExpanded = sidebar.classList.contains('active');
+        menuToggle.setAttribute('aria-expanded', isExpanded.toString());
     });
 
-    projectsToggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation(); // Prevent event from bubbling up
-        projectsToggle.classList.toggle('active');
-        submenu.classList.toggle('active');
-    });
-
-    // Close sidebar when clicking on a link (mobile only)
-    const menuLinks = sidebar.querySelectorAll('a:not(.projects-toggle)');
-    menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-                sidebar.classList.remove('active');
-                projectsToggle.classList.remove('active');
-                submenu.classList.remove('active');
-            }
-        });
-    });
-
-    // Close sidebar when clicking outside
+    // Close sidebar when clicking outside on mobile
     document.addEventListener('click', (e) => {
         if (window.innerWidth <= 768) {
             if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
                 sidebar.classList.remove('active');
-                projectsToggle.classList.remove('active');
-                submenu.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
             }
         }
     });
 
-    // Update resize handler for smoother transitions
+    // Handle window resize
     let resizeTimer;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth > 768) {
                 sidebar.classList.remove('active');
-                projectsToggle.classList.remove('active');
-                submenu.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
             }
-        }, 250); // Debounce resize events
+        }, 250);
     });
 } 
