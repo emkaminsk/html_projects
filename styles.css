@@ -274,3 +274,13 @@ h2 {
 .project-item .btn {
     margin-top: 0.5rem;
 }
+
+.project-item h2 i {
+    margin-right: 0.5rem;
+    color: var(--secondary-color);
+    transition: transform 0.3s ease;
+}
+
+.project-item:hover h2 i {
+    transform: scale(1.2);
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utilities - Personal Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <!-- Sidebar will be loaded here -->
+        </div>
+        <div class="content">
+            <h1>Utilities</h1>
+            <div class="project-list">
+                <div class="project-item section">
+                    <h2>VIM Manual</h2>
+                    <p>A comprehensive guide for VIM text editor commands and shortcuts.</p>
+                    <a href="https://emkaminsk.github.io/Sciaga_vim/" class="btn btn-primary">Try it</a>
+                </div>
+                <div class="project-item section">
+                    <h2>Dice Roll</h2>
+                    <p>Simple and fun dice rolling simulator for your gaming needs.</p>
+                    <a href="https://diceroll.byst.re/" class="btn btn-primary">Try it</a>
+                </div>
+                <div class="project-item section">
+                    <h2>2048 Game</h2>
+                    <p>Play the classic 2048 puzzle game in your browser.</p>
+                    <a href="https://game2048.byst.re/" class="btn btn-primary">Try it</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Load sidebar
+            $('.sidebar').load('sidebar.html', function() {
+                // Highlight current page in menu
+                $('a[href="utilities.html"]').addClass('active');
+                
+                // Initialize submenu functionality
+                $('.utilities-toggle').click(function(e) {
+                    e.preventDefault();
+                    $(this).siblings('.submenu').slideToggle();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

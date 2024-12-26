@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Personal Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <!-- Sidebar will be loaded here -->
+        </div>
+        <div class="content">
+            <h1>Portfolio</h1>
+            
+            <div class="project-item section">
+                <h2><i class="fas fa-rocket"></i> Prometheus</h2>
+                <p>Currently working as a Product Owner, focusing on:</p>
+                <ul class="compact-list">
+                    <li>Business Analysis of the Master Data as a Service (MDaaS) process</li>
+                    <li>Development of a solution for Document Linking</li>
+                    <li>MDaaS Sustain process analysis and customer facing application rebuild</li>
+                    <li>AI and ML solutions for the MDaaS process</li>
+                    <li>Event Driven Architecture (EDA) implementation in AWS, Terraform and Python</li>
+                </ul>
+            </div>
+
+            <div class="project-item section">
+                <h2><i class="fas fa-flask"></i> Sartorius</h2>
+                <p>Technical Product Owner of the Umetrics Studio Data Analysis Platform</p>
+                <ul class="compact-list">
+                    <li>Collaboration Area - from vision to implementation</li>
+                    <li>Public API for the Cloud Data Analysis Platform</li>
+                    <li>CI/CD rework facilitation</li>
+                </ul>
+            </div>
+
+            <div class="project-item section">
+                <h2><i class="fas fa-shield-alt"></i> Codenotary</h2>
+                <p>Product Manager of SBOM and Software Supply Chain solutions</p>
+                <ul class="compact-list">
+                    <li>Immudb Vault - requirements facilitation, backlog management and automated testing</li>
+                </ul>
+            </div>
+
+            <div class="project-item section">
+                <h2><i class="fas fa-landmark"></i> Santander Bank Polska</h2>
+                <p>Credint Lending - Product Owner</p>
+                <ul class="compact-list">
+                    <li>Individual Credit Capacity implementation and oversight</li>
+                    <li>Demerger with Deutsche Bank - Responsible for requirements facilitation and product owner for the risk IT team</li>
+                    <li>Test Lead in Kredyt Bank merger</li>
+                    <li>Business Owner of the Decision Engine migration from Strata CGI to AbInitio BR</li>
+                </ul>
+            </div>
+
+            <div class="project-item section">
+                <h2><i class="fas fa-graduation-cap"></i> University Work</h2>
+                <p>Academic achievements and research:</p>
+                <ul class="compact-list">
+                    <li>Master's degree in Finance and Banking</li>
+                    <li>Research in cointegration, time series analysis and financial econometrics</li>
+                    <li>Published papers in scientific journals and conference proceedings</li>
+                </ul>
+            </div>
+
+            <div class="project-item section">
+                <h2><i class="fas fa-heart"></i> Charity and Interests</h2>
+                <p>Community involvement and personal development:</p>
+                <ul class="compact-list">
+                    <li>Volunteer work in the Vipassana Foundation in Poland</li>                    
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Load sidebar
+            $('.sidebar').load('sidebar.html', function() {
+                // Highlight current page in menu
+                $('a[href="portfolio.html"]').addClass('active');
+            });
+        });
+    </script>
+</body>
+</html>
