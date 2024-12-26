@@ -173,7 +173,7 @@ h2 {
         padding-left: 0;
     }
     
-    #menuToggle {
+    .navbar-toggler {
         position: fixed;
         top: 1rem;
         left: 1rem;
@@ -187,6 +187,13 @@ h2 {
         font-size: 1.5rem;
         display: block;
         color: var(--primary-color);
+    }
+}
+
+/* Desktop styles */
+@media (min-width: 769px) {
+    .navbar-toggler {
+        display: none;
     }
 }
 
