@@ -1,0 +1,56 @@
+# Example nginx configuration for html_projects
+# Place this in your nginx sites-available directory or include in your main config
+
+server {
+    listen 80;
+    server_name your-domain.com;  # Replace with your domain
+    
+    # Document root - adjust path to your deployment location
+    root /path/to/gitrepos/html_projects;
+    index index.html;
+
+    # Block access to hidden files and directories (starting with .)
+    location ~ /\. {
+        deny all;
+        access_log off;
+        log_not_found off;
+    }
+
+    # Specifically block .ai and .cursor directories (redundant but explicit)
+    location ~ ^/(\.ai|\.cursor) {
+        deny all;
+        access_log off;
+        log_not_found off;
+    }
+
+    # Block access to .git directory (if present)
+    location ~ ^/\.git {
+        deny all;
+        access_log off;
+        log_not_found off;
+    }
+
+    # Block access to .github directory
+    location ~ ^/\.github {
+        deny all;
+        access_log off;
+        log_not_found off;
+    }
+
+    # Serve static files
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    # Optional: Add security headers
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+
+    # Optional: Enable gzip compression
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/xml+rss application/json;
+}
+
