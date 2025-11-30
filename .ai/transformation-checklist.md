@@ -342,3 +342,40 @@ Compare before/after by checking:
 - Hover effect intensity
 - Overall visual hierarchy
 
+---
+
+## 🔴 PRODUCTION DEPLOYMENT ISSUE (November 30, 2025)
+
+### Cloudflare Caching Problem
+
+**Issue:** Production site (`mkhome.byst.re`) showing old purple gradient statistics section, while local shows new white design.
+
+**Root Cause:** Cloudflare aggressive caching - CSS files cached for 4+ hours by default when nginx has no cache headers.
+
+**Evidence:**
+- ✅ Local: Shows white statistics section (new design)
+- ❌ Production: Shows purple gradient statistics section (old design)
+- ✅ `styles.css` updated Nov 30 14:47
+- ❌ Original nginx config had no cache headers for static files
+
+**Immediate Fix Required:**
+1. **Purge Cloudflare Cache:**
+   - Cloudflare Dashboard → Caching → Purge Everything
+   - Or purge specific file: `styles.css`
+   - Hard refresh production site (Ctrl+Shift+R)
+
+**Long-Term Fix (Implemented):**
+- ✅ Updated nginx config (`.deploy/mkhome`) with proper cache headers:
+  - CSS/JS: 1 hour cache (allows updates to propagate)
+  - Images/Fonts: 1 week cache
+  - HTML: No cache (always fresh)
+
+**Next Steps:**
+- [ ] Deploy updated nginx config: `sudo nginx -t && sudo systemctl reload nginx`
+- [ ] Purge Cloudflare cache
+- [ ] Verify production shows white statistics section
+- [ ] Test that CSS updates propagate within 1 hour
+
+**Future Recommendation:**
+Consider cache-busting with versioning (`styles.css?v=timestamp`) for longer cache times (1 year) and instant updates.
+

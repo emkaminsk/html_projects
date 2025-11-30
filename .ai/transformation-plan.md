@@ -753,6 +753,14 @@ section:hover {
 - **Neutral:** Added gradient text effect (minimal performance cost)
 - **Result:** Slight performance improvement overall
 
+### Production Deployment Note
+
+**Cloudflare Caching Issue (Nov 30, 2025):**
+Production site may show old purple gradient statistics section due to Cloudflare caching. 
+- **Fix:** Purge Cloudflare cache after deploying CSS changes
+- **Prevention:** Updated nginx config with proper cache headers (CSS/JS: 1 hour cache)
+- See `transformation-checklist.md` for detailed caching analysis
+
 ### Design Principles Applied
 1. **Less is more** - Not every element needs special effects
 2. **Hierarchy matters** - Make some elements stand out by making others neutral

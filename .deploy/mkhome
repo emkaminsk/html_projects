@@ -22,6 +22,31 @@ server {
         add_header Referrer-Policy "no-referrer-when-downgrade";
         add_header Feature-Policy "geolocation 'self'; midi 'none'; sync-xhr 'self'; microphone 'none'; camera 'none'; magneto>
 
+        # CSS and JS - shorter cache (1 hour) to allow updates to propagate quickly
+        # For production, consider using versioning (styles.css?v=timestamp) and longer cache
+        location ~* \.(css|js)$ {
+            expires 1h;
+            add_header Cache-Control "public, max-age=3600";
+            add_header Vary "Accept-Encoding";
+            try_files $uri =404;
+        }
+
+        # Images and fonts - longer cache (1 week)
+        location ~* \.(jpg|jpeg|png|gif|ico|svg|woff|woff2|ttf|eot)$ {
+            expires 1w;
+            add_header Cache-Control "public, max-age=604800";
+            add_header Vary "Accept-Encoding";
+            try_files $uri =404;
+        }
+
+        # HTML files - no cache to ensure fresh content
+        location ~* \.(html)$ {
+            expires -1;
+            add_header Cache-Control "no-cache, no-store, must-revalidate";
+            add_header Pragma "no-cache";
+            try_files $uri $uri/ =404;
+        }
+
         location / {
                 try_files $uri $uri/ =404;
         }
