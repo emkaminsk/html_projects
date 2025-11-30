@@ -20,7 +20,7 @@ server {
         add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload";
         add_header X-Content-Type-Options "nosniff";
         add_header Referrer-Policy "no-referrer-when-downgrade";
-        add_header Feature-Policy "geolocation 'self'; midi 'none'; sync-xhr 'self'; microphone 'none'; camera 'none'; magneto>
+        add_header Permissions-Policy "geolocation=(self), midi=(), sync-xhr=(self), microphone=(), camera=(), magnetometer=()";
 
         # CSS and JS - shorter cache (1 hour) to allow updates to propagate quickly
         # For production, consider using versioning (styles.css?v=timestamp) and longer cache
