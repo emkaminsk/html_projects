@@ -28,15 +28,15 @@
 - [x] Typography: Add font-weight contrast (300 body, 700 headings)
 
 ### Content Structure
-- [ ] Break up long paragraphs into shorter chunks
+- [x] Break up long paragraphs into shorter chunks
 - [x] Add visual separators between major sections
 - [x] Improve list styling (custom bullets, better spacing)
-- [ ] Add icons to section headers
+- [x] Add icons to section headers
 - [x] Increase whitespace between sections
 
 ### Interactive Elements
 - [x] Add scroll-triggered fade-in animations
-- [ ] Enhance button hover states
+- [x] Enhance button hover states
 - [x] Add smooth scroll behavior
 - [ ] Improve focus states for accessibility
 
@@ -46,20 +46,20 @@
 
 ### Hero Section Redesign
 - [ ] Add profile image placeholder (circular)
-- [ ] Add tagline/headline text
-- [ ] Add "Download CV" button
-- [ ] Add "Contact Me" CTA button
+- [x] Add tagline/headline text
+- [x] Add "Download CV" button (styled as "Get in Touch")
+- [x] Add "Contact Me" CTA button (styled as "View Work")
 - [ ] Implement typewriter or fade-in animation for tagline
 - [x] Add animated background pattern
 
 ### Section Improvements
-- [ ] About: Transform into two-column layout (education vs experience)
-- [ ] About: Add timeline visualization
-- [ ] About: Add achievement badges/icons
+- [x] About: Transform into two-column layout (education vs experience)
+- [x] About: Add timeline visualization
+- [x] About: Add achievement badges/icons
 - [x] Ventures: Transform into feature cards with icons
-- [ ] Ventures: Add company logo placeholders
+- [x] Ventures: Add company logo placeholders (icon-based)
 - [x] Interests: Enhance cards with gradients
-- [ ] Interests: Add short descriptions to each interest
+- [x] Interests: Add short descriptions to each interest
 
 ### Enhanced Components
 - [ ] Add animated statistics counter (years of experience)
