@@ -1,0 +1,31 @@
+server {
+        listen 80;
+        listen [::]:80;
+
+        root /home/marcin/gitrepos/html_projects;
+        index index.html;
+
+        server_name mkhome mkhome.byst.re www.mkhome.byst.re;
+
+        error_page 404 /error404.html;
+        # Block all hidden files and directories
+        location ~ /\. {
+            deny all;
+            access_log off;
+            log_not_found off;
+        }
+
+        add_header X-Frame-Options "SAMEORIGIN";
+        add_header Content-Security-Policy "object-src 'none'; frame-ancestors 'none'; base-uri 'self';";
+        add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload";
+        add_header X-Content-Type-Options "nosniff";
+        add_header Referrer-Policy "no-referrer-when-downgrade";
+        add_header Feature-Policy "geolocation 'self'; midi 'none'; sync-xhr 'self'; microphone 'none'; camera 'none'; magneto>
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+
+
+
