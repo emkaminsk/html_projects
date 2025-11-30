@@ -38,7 +38,7 @@
 - [x] Add scroll-triggered fade-in animations
 - [x] Enhance button hover states
 - [x] Add smooth scroll behavior
-- [ ] Improve focus states for accessibility
+- [x] Improve focus states for accessibility
 
 ---
 
@@ -62,11 +62,11 @@
 - [x] Interests: Add short descriptions to each interest
 
 ### Enhanced Components
-- [ ] Add animated statistics counter (years of experience)
+- [x] Add animated statistics counter (years of experience)
 - [ ] Add skill progress bars (if applicable)
-- [ ] Create reusable card component class
-- [ ] Add back-to-top button (appears on scroll)
-- [ ] Enhance mobile menu animation
+- [x] Create reusable card component class
+- [x] Add back-to-top button (appears on scroll)
+- [x] Enhance mobile menu animation
 
 ---
 
