@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Store | Marcin Kaminski</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Store-specific styles extending the main theme */
+        .store-hero {
+            text-align: center;
+            padding: 4rem 2rem 3rem;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color-2) 100%);
+            color: white;
+            border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+            position: relative;
+            overflow: hidden;
+            margin: -2rem -2rem 3rem -2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .store-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .store-hero h1,
+        .store-hero p,
+        .store-hero .lang-switcher {
+            position: relative;
+            z-index: 1;
+        }
+
+        .store-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .store-hero .store-tagline {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 600px;
+            margin: 1rem auto 2rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* Language Switcher */
+        .lang-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 0;
+        }
+
+        .lang-btn {
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            border: 2px solid rgba(255,255,255,0.4);
+            background: transparent;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Lato', sans-serif;
+        }
+
+        .lang-btn:hover {
+            border-color: white;
+            background: rgba(255,255,255,0.15);
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: var(--accent-color);
+            border-color: white;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Product Card */
+        .product-card {
+            background: white;
+            border-radius: var(--border-radius);
+            border: 2px solid rgba(102,126,234,0.1);
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-md);
+            /* Override section defaults */
+            opacity: 1;
+            transform: none;
+            animation: fadeInUp 0.6s ease forwards;
+            margin-bottom: 0;
+            padding: 0;
+            border-left: 2px solid rgba(102,126,234,0.1);
+        }
+
+        .product-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-6px);
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .product-image-wrapper {
+            position: relative;
+            background: linear-gradient(135deg, rgba(102,126,234,0.05) 0%, rgba(118,75,162,0.05) 100%);
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 320px;
+        }
+
+        .product-image-wrapper img {
+            max-height: 280px;
+            width: auto;
+            max-width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image-wrapper img {
+            transform: scale(1.03);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color-2) 100%);
+            color: white;
+        }
+
+        .product-body {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .product-body h3 {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin: 0 0 0.25rem;
+        }
+
+        .product-subtitle {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            color: var(--text-color);
+            line-height: 1.8;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .product-highlights {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.5rem;
+        }
+
+        .product-highlights li {
+            padding: 0.4rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .product-highlights li i {
+            color: var(--success-color);
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+        }
+
+        .product-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color-2) 100%);
+            color: white;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            align-self: flex-start;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        }
+
+        .product-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102,126,234,0.4);
+            color: white;
+        }
+
+        .product-cta i {
+            transition: var(--transition-fast);
+        }
+
+        .product-cta:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Trust Section */
+        .trust-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid var(--accent-color);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            opacity: 1;
+            transform: none;
+            animation: fadeInUp 0.6s ease forwards;
+            animation-delay: 0.4s;
+        }
+
+        .trust-section:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .trust-item {
+            padding: 1.5rem 1rem;
+        }
+
+        .trust-item i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color-2) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .trust-item h4 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .trust-item p {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            opacity: 0.85;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Back link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            transition: var(--transition-fast);
+            position: relative;
+            z-index: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .back-link:hover {
+            color: white;
+        }
+
+        /* Footer */
+        .store-footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-color);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .store-hero {
+                padding: 3rem 1.5rem 2rem;
+                margin: -1.5rem -1.5rem 2rem -1.5rem;
+            }
+
+            .store-hero h1 {
+                font-size: 2rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .product-image-wrapper {
+                min-height: 240px;
+                padding: 1.5rem;
+            }
+
+            .product-image-wrapper img {
+                max-height: 220px;
+            }
+
+            .product-body {
+                padding: 1.5rem;
+            }
+
+            .trust-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .trust-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar" id="sidebar"></nav>
+        <main class="content" id="store-content">
+            <header class="store-hero">
+                <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> <span data-i18n="backHome">Back to Homepage</span></a>
+                <h1><i class="fas fa-book-open"></i> <span data-i18n="heroTitle">Digital Store</span></h1>
+                <p class="store-tagline" data-i18n="heroTagline">Practical guides and ebooks crafted from real-world experience in technology, AI, and product management.</p>
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="pl">PL</button>
+                </div>
+            </header>
+
+            <div class="products-grid" id="products-grid">
+                <!-- Products loaded dynamically from store/products.json -->
+            </div>
+
+            <div class="trust-section">
+                <div class="trust-grid">
+                    <div class="trust-item">
+                        <i class="fas fa-user-tie"></i>
+                        <h4 data-i18n="trustAuthor">Written by a Practitioner</h4>
+                        <p data-i18n="trustAuthorDesc">Content based on years of hands-on professional experience, not theory alone.</p>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-bolt"></i>
+                        <h4 data-i18n="trustInstant">Instant Delivery</h4>
+                        <p data-i18n="trustInstantDesc">Get your digital copy immediately after purchase via Amazon Kindle.</p>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4 data-i18n="trustAmazon">Amazon Trusted</h4>
+                        <p data-i18n="trustAmazonDesc">All purchases backed by Amazon's buyer protection and refund policy.</p>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-sync-alt"></i>
+                        <h4 data-i18n="trustUpdated">Regularly Updated</h4>
+                        <p data-i18n="trustUpdatedDesc">Content kept current with the latest trends and best practices.</p>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="store-footer">
+                <p>&copy; 2026 Marcin Kaminski. <span data-i18n="footerRights">All rights reserved.</span></p>
+            </footer>
+        </main>
+    </div>
+
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+    (function() {
+        // Static UI translations (not product content)
+        const UI_STRINGS = {
+            en: {
+                heroTitle: "Digital Store",
+                heroTagline: "Practical guides and ebooks crafted from real-world experience in technology, AI, and product management.",
+                backHome: "Back to Homepage",
+                trustAuthor: "Written by a Practitioner",
+                trustAuthorDesc: "Content based on years of hands-on professional experience, not theory alone.",
+                trustInstant: "Instant Delivery",
+                trustInstantDesc: "Get your digital copy immediately after purchase via Amazon Kindle.",
+                trustAmazon: "Amazon Trusted",
+                trustAmazonDesc: "All purchases backed by Amazon's buyer protection and refund policy.",
+                trustUpdated: "Regularly Updated",
+                trustUpdatedDesc: "Content kept current with the latest trends and best practices.",
+                footerRights: "All rights reserved.",
+                badgeEbook: "Ebook",
+                badgeGuide: "Prompt Guide"
+            },
+            es: {
+                heroTitle: "Tienda Digital",
+                heroTagline: "Guias practicas y ebooks creados a partir de experiencia real en tecnologia, IA y gestion de productos.",
+                backHome: "Volver al Inicio",
+                trustAuthor: "Escrito por un Profesional",
+                trustAuthorDesc: "Contenido basado en anos de experiencia profesional practica, no solo teoria.",
+                trustInstant: "Entrega Inmediata",
+                trustInstantDesc: "Recibe tu copia digital inmediatamente despues de la compra a traves de Amazon Kindle.",
+                trustAmazon: "Confianza de Amazon",
+                trustAmazonDesc: "Todas las compras respaldadas por la proteccion al comprador y politica de reembolso de Amazon.",
+                trustUpdated: "Actualizado Regularmente",
+                trustUpdatedDesc: "Contenido actualizado con las ultimas tendencias y mejores practicas.",
+                footerRights: "Todos los derechos reservados.",
+                badgeEbook: "Ebook",
+                badgeGuide: "Guia de Prompts"
+            },
+            pl: {
+                heroTitle: "Sklep Cyfrowy",
+                heroTagline: "Praktyczne przewodniki i ebooki stworzone na bazie rzeczywistego doswiadczenia w technologii, AI i zarzadzaniu produktami.",
+                backHome: "Powrot do Strony Glownej",
+                trustAuthor: "Napisane przez Praktyka",
+                trustAuthorDesc: "Tresc oparta na wieloletnim doswiadczeniu zawodowym, nie tylko teorii.",
+                trustInstant: "Natychmiastowa Dostawa",
+                trustInstantDesc: "Otrzymaj swoja cyfrowa kopie natychmiast po zakupie przez Amazon Kindle.",
+                trustAmazon: "Zaufanie Amazon",
+                trustAmazonDesc: "Wszystkie zakupy chronione przez ochrone kupujacych i polityke zwrotow Amazon.",
+                trustUpdated: "Regularnie Aktualizowane",
+                trustUpdatedDesc: "Tresc aktualizowana zgodnie z najnowszymi trendami i najlepszymi praktykami.",
+                footerRights: "Wszelkie prawa zastrzezone.",
+                badgeEbook: "Ebook",
+                badgeGuide: "Przewodnik Promptow"
+            }
+        };
+
+        let products = [];
+        let currentLang = localStorage.getItem('storeLang') || 'en';
+
+        // Load products from JSON
+        fetch('store/products.json')
+            .then(r => r.json())
+            .then(data => {
+                products = data;
+                setLanguage(currentLang);
+            })
+            .catch(err => console.error('Failed to load products:', err));
+
+        // Language switcher
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                setLanguage(btn.dataset.lang);
+            });
+        });
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('storeLang', lang);
+            document.documentElement.lang = lang;
+
+            // Update switcher active state
+            document.querySelectorAll('.lang-btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.lang === lang);
+            });
+
+            // Update static UI strings
+            const strings = UI_STRINGS[lang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (strings[key]) el.textContent = strings[key];
+            });
+
+            // Update page title
+            const titles = { en: 'Digital Store', es: 'Tienda Digital', pl: 'Sklep Cyfrowy' };
+            document.title = (titles[lang] || titles.en) + ' | Marcin Kaminski';
+
+            // Render products
+            renderProducts(lang);
+        }
+
+        function renderProducts(lang) {
+            const grid = document.getElementById('products-grid');
+            const strings = UI_STRINGS[lang];
+
+            grid.innerHTML = products.map((product, i) => {
+                const p = product[lang] || product.en;
+                const badgeLabel = product.category === 'ebook' ? strings.badgeEbook : strings.badgeGuide;
+
+                return `
+                <article class="product-card" style="animation-delay: ${0.1 + i * 0.1}s">
+                    <div class="product-image-wrapper">
+                        <span class="product-badge">${badgeLabel}</span>
+                        <img src="${product.image}" alt="${p.title}" loading="lazy">
+                    </div>
+                    <div class="product-body">
+                        <h3>${p.title}</h3>
+                        <p class="product-subtitle">${p.subtitle}</p>
+                        <p class="product-description">${p.description}</p>
+                        <ul class="product-highlights">
+                            ${p.highlights.map(h => `<li><i class="fas fa-check-circle"></i> ${h}</li>`).join('')}
+                        </ul>
+                        <a href="${product.kdpUrl}" target="_blank" rel="noopener noreferrer" class="product-cta">
+                            <i class="fab fa-amazon"></i> ${p.cta} <i class="fas fa-external-link-alt" style="font-size: 0.8rem"></i>
+                        </a>
+                    </div>
+                </article>`;
+            }).join('');
+        }
+
+        // Set initial active button
+        document.querySelector(`.lang-btn[data-lang="${currentLang}"]`)?.classList.add('active');
+    })();
+    </script>
+</body>
+</html>

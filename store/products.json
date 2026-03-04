@@ -1,0 +1,86 @@
+[
+  {
+    "id": "it-for-seniors",
+    "image": "store/assets/it-for-seniors.png",
+    "category": "ebook",
+    "kdpUrl": "https://www.amazon.com/Tecnolog%C3%ADa-para-Seniors-Pr%C3%A1ctica-Principiantes-ebook/dp/B0GPQFWPB3/ref=sr_1_1?dib=eyJ2IjoiMSJ9.mpz4p6ki7PUiCqEHIGh7U_7ZdKl1T8RwIKj7LN1NfMtOoW_pxBq9bFX7bNyGir4sc_ZDSLBA9beXnxBc3HgH4g.ZEyqPqCDEmkA_eYIIyXa340BiSopkPhM3Fk8NJRpIPY&dib_tag=se&qid=1772641067&refinements=p_27%3AMarcin+Kaminski&s=digital-text&sr=1-1&text=Marcin+Kaminski",
+    "en": {
+      "title": "Technology for Seniors: A Practical Guide",
+      "subtitle": "The Complete Guide for Beginners",
+      "description": "A comprehensive 16-chapter guide that takes you from zero to confident tech user. Covers everything from how computers work, internet basics, smartphone essentials, cybersecurity, online banking, social media safety, AI fundamentals, and the digital future — all explained in clear, jargon-free language.",
+      "highlights": [
+        "16 chapters from basics to advanced topics",
+        "Clear explanations without unnecessary jargon",
+        "Practical examples you can apply immediately",
+        "Up-to-date with 2026 technology trends"
+      ],
+      "cta": "Get it on Amazon"
+    },
+    "es": {
+      "title": "Tecnologia para Seniors: Una Guia Practica",
+      "subtitle": "La Guia Completa para Principiantes",
+      "description": "Una guia completa de 16 capitulos disenada para llevarte de cero a usuario seguro de tecnologia. Cubre todo, desde como funciona un ordenador, fundamentos de internet, esenciales del movil, ciberseguridad, banca online, seguridad en redes sociales, fundamentos de IA y el futuro digital — todo explicado en un lenguaje claro y sin tecnicismos.",
+      "highlights": [
+        "16 capitulos desde lo basico hasta temas avanzados",
+        "Explicaciones claras sin tecnicismos innecesarios",
+        "Ejemplos practicos que puedes aplicar inmediatamente",
+        "Actualizado con las tendencias tecnologicas de 2026"
+      ],
+      "cta": "Consiguelo en Amazon"
+    },
+    "pl": {
+      "title": "Technologia dla Seniorow: Praktyczny Przewodnik",
+      "subtitle": "Kompletny przewodnik dla poczatkujacych",
+      "description": "Kompleksowy przewodnik w 16 rozdzialach, ktory przeprowadzi Cie od zera do pewnego uzytkownika technologii. Obejmuje wszystko — od dzialania komputerow, podstaw internetu, smartfonow, cyberbezpieczenstwa, bankowosci online, bezpieczenstwa w mediach spolecznosciowych, podstaw AI az po cyfrowa przyszlosc — wszystko wyjasnione prostym, zrozumialym jezykiem.",
+      "highlights": [
+        "16 rozdzialow od podstaw po zaawansowane tematy",
+        "Jasne wyjasnienia bez zbednego zargonu",
+        "Praktyczne przyklady do natychmiastowego zastosowania",
+        "Aktualne trendy technologiczne 2026"
+      ],
+      "cta": "Kup na Amazon"
+    }
+  },
+  {
+    "id": "ai-product-management",
+    "image": "store/assets/ai-product-management.png",
+    "category": "ebook",
+    "kdpUrl": "https://www.amazon.com/Gestion-Productos-Product-Management-Definitiva-ebook/dp/B0GPLH8VWT/ref=sr_1_2?dib=eyJ2IjoiMSJ9.mpz4p6ki7PUiCqEHIGh7U_7ZdKl1T8RwIKj7LN1NfMtOoW_pxBq9bFX7bNyGir4sc_ZDSLBA9beXnxBc3HgH4g.ZEyqPqCDEmkA_eYIIyXa340BiSopkPhM3Fk8NJRpIPY&dib_tag=se&qid=1772640820&refinements=p_27%3AMarcin+Kaminski&s=digital-text&sr=1-2&text=Marcin+Kaminski",
+    "en": {
+      "title": "AI Product Management",
+      "subtitle": "The Definitive Guide for the Future Product Manager",
+      "description": "Master the intersection of artificial intelligence and product management. This guide covers ML fundamentals for PMs, data analysis for AI products, AI product roadmapping, career paths and salaries in AI PM — everything you need to lead AI-powered products with confidence.",
+      "highlights": [
+        "ML & AI fundamentals tailored for Product Managers",
+        "Data-driven decision making for AI products",
+        "Real-world AI product roadmap strategies",
+        "Career guide with salary insights"
+      ],
+      "cta": "Get it on Amazon"
+    },
+    "es": {
+      "title": "Gestion de Productos con IA",
+      "subtitle": "La Guia Definitiva para el Product Manager del Futuro",
+      "description": "Domina la interseccion entre inteligencia artificial y gestion de productos. Esta guia cubre fundamentos de ML para PMs, analisis de datos para productos de IA, roadmapping de productos de IA, trayectorias profesionales y salarios en AI PM — todo lo que necesitas para liderar productos potenciados por IA con confianza.",
+      "highlights": [
+        "Fundamentos de ML e IA adaptados para Product Managers",
+        "Toma de decisiones basada en datos para productos de IA",
+        "Estrategias reales de roadmap de productos de IA",
+        "Guia de carrera con informacion salarial"
+      ],
+      "cta": "Consiguelo en Amazon"
+    },
+    "pl": {
+      "title": "Zarzadzanie Produktami z AI",
+      "subtitle": "Kompletny przewodnik dla Product Managera przyszlosci",
+      "description": "Opanuj polaczenie sztucznej inteligencji i zarzadzania produktami. Ten przewodnik obejmuje podstawy ML dla PM-ow, analize danych dla produktow AI, tworzenie roadmap produktow AI, sciezki kariery i wynagrodzenia w AI PM — wszystko, czego potrzebujesz, aby pewnie prowadzic produkty oparte na AI.",
+      "highlights": [
+        "Podstawy ML i AI dostosowane dla Product Managerow",
+        "Podejmowanie decyzji opartych na danych dla produktow AI",
+        "Realne strategie roadmap produktow AI",
+        "Przewodnik kariery z informacjami o wynagrodzeniach"
+      ],
+      "cta": "Kup na Amazon"
+    }
+  }
+]
