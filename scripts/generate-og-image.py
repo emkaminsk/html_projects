@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Generate Open Graph image (1200x630px) with site branding."""
+"""Generate Open Graph image (1200x630px) with site branding.
+
+Renders at 2x internally and downscales for sharper text on social platforms.
+"""
 
 from PIL import Image, ImageDraw, ImageFont
 from pathlib import Path
@@ -8,6 +11,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "store" / "assets" / "og-image.png"
 
 WIDTH, HEIGHT = 1200, 630
+SCALE = 2  # Render at 2x for sharper text
 
 # Brand colors from styles.css
 ACCENT_1 = (102, 126, 234)  # #667eea
@@ -26,7 +30,6 @@ def draw_gradient(draw, width, height, c1, c2):
 
 
 def get_font(size):
-    # Try common sans-serif fonts available on Linux
     for name in [
         "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
         "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
@@ -39,63 +42,48 @@ def get_font(size):
     return ImageFont.load_default()
 
 
+def center_text(draw, y, text, font, fill, canvas_width):
+    bbox = draw.textbbox((0, 0), text, font=font)
+    text_w = bbox[2] - bbox[0]
+    draw.text(((canvas_width - text_w) / 2, y), text, fill=fill, font=font)
+
+
 def main():
-    img = Image.new("RGB", (WIDTH, HEIGHT))
+    w, h = WIDTH * SCALE, HEIGHT * SCALE
+    img = Image.new("RGB", (w, h))
     draw = ImageDraw.Draw(img)
 
-    # Diagonal gradient (approximated as vertical)
-    draw_gradient(draw, WIDTH, HEIGHT, ACCENT_1, ACCENT_2)
+    draw_gradient(draw, w, h, ACCENT_1, ACCENT_2)
 
-    # Semi-transparent decorative circles (simulated with lighter color blending)
-    overlay = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
+    # Decorative circles
+    overlay = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     overlay_draw = ImageDraw.Draw(overlay)
-    overlay_draw.ellipse([50, 100, 450, 500], fill=(255, 255, 255, 20))
-    overlay_draw.ellipse([750, 300, 1200, 750], fill=(255, 255, 255, 15))
+    overlay_draw.ellipse([100, 200, 900, 1000], fill=(255, 255, 255, 20))
+    overlay_draw.ellipse([1500, 600, 2400, 1500], fill=(255, 255, 255, 15))
     img = Image.alpha_composite(img.convert("RGBA"), overlay).convert("RGB")
     draw = ImageDraw.Draw(img)
 
-    # Text
-    font_large = get_font(64)
-    font_medium = get_font(32)
-    font_small = get_font(24)
+    font_large = get_font(128)
+    font_medium = get_font(64)
+    font_small = get_font(48)
 
     white = (255, 255, 255)
-    white_dim = (255, 255, 255, 200)
 
-    # Name
-    name = "Marcin Kamiński"
-    bbox = draw.textbbox((0, 0), name, font=font_large)
-    name_w = bbox[2] - bbox[0]
-    draw.text(((WIDTH - name_w) / 2, 200), name, fill=white, font=font_large)
+    center_text(draw, 400, "Marcin Kamiński", font_large, white, w)
+    center_text(draw, 580, "Senior Consultant & Product Manager", font_medium, white, w)
 
-    # Subtitle
-    subtitle = "Senior Consultant & Product Manager"
-    bbox = draw.textbbox((0, 0), subtitle, font=font_medium)
-    sub_w = bbox[2] - bbox[0]
-    draw.text(((WIDTH - sub_w) / 2, 290), subtitle, fill=white, font=font_medium)
+    # Divider
+    line_y = 700
+    line_half = 160
+    draw.line([(w / 2 - line_half, line_y), (w / 2 + line_half, line_y)], fill=white, width=4)
 
-    # Divider line
-    line_y = 350
-    line_half = 80
-    draw.line(
-        [(WIDTH / 2 - line_half, line_y), (WIDTH / 2 + line_half, line_y)],
-        fill=white,
-        width=2,
-    )
+    center_text(draw, 760, "Portfolio · Digital Store · Web Tools", font_small, white, w)
+    center_text(draw, 1080, "mkhome.byst.re", font_small, (255, 255, 255, 200), w)
 
-    # Tagline
-    tagline = "Portfolio · Digital Store · Web Tools"
-    bbox = draw.textbbox((0, 0), tagline, font=font_small)
-    tag_w = bbox[2] - bbox[0]
-    draw.text(((WIDTH - tag_w) / 2, 380), tagline, fill=white, font=font_small)
+    # Downscale to final size with high-quality resampling
+    img = img.resize((WIDTH, HEIGHT), Image.LANCZOS)
 
-    # URL at bottom
-    url = "mkhome.byst.re"
-    bbox = draw.textbbox((0, 0), url, font=font_small)
-    url_w = bbox[2] - bbox[0]
-    draw.text(((WIDTH - url_w) / 2, 540), url, fill=(255, 255, 255, 180), font=font_small)
-
-    img.save(OUTPUT, "PNG")
+    img.save(OUTPUT, "PNG", optimize=True)
     print(f"Generated {OUTPUT} ({WIDTH}x{HEIGHT})")
 
 

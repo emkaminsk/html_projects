@@ -3,6 +3,8 @@
     "id": "it-for-seniors",
     "image": "store/assets/it-for-seniors.png",
     "category": "ebook",
+    "price": "9.99",
+    "currency": "USD",
     "kdpUrl": "https://www.amazon.com/Tecnolog%C3%ADa-para-Seniors-Pr%C3%A1ctica-Principiantes-ebook/dp/B0GPQFWPB3/ref=sr_1_1?dib=eyJ2IjoiMSJ9.mpz4p6ki7PUiCqEHIGh7U_7ZdKl1T8RwIKj7LN1NfMtOoW_pxBq9bFX7bNyGir4sc_ZDSLBA9beXnxBc3HgH4g.ZEyqPqCDEmkA_eYIIyXa340BiSopkPhM3Fk8NJRpIPY&dib_tag=se&qid=1772641067&refinements=p_27%3AMarcin+Kaminski&s=digital-text&sr=1-1&text=Marcin+Kaminski",
     "en": {
       "title": "Technology for Seniors: A Practical Guide (Spanish Edition)",
@@ -45,6 +47,8 @@
     "id": "ai-product-management",
     "image": "store/assets/ai-product-management.png",
     "category": "ebook",
+    "price": "9.99",
+    "currency": "USD",
     "kdpUrl": "https://www.amazon.com/Gestion-Productos-Product-Management-Definitiva-ebook/dp/B0GPLH8VWT/ref=sr_1_2?dib=eyJ2IjoiMSJ9.mpz4p6ki7PUiCqEHIGh7U_7ZdKl1T8RwIKj7LN1NfMtOoW_pxBq9bFX7bNyGir4sc_ZDSLBA9beXnxBc3HgH4g.ZEyqPqCDEmkA_eYIIyXa340BiSopkPhM3Fk8NJRpIPY&dib_tag=se&qid=1772640820&refinements=p_27%3AMarcin+Kaminski&s=digital-text&sr=1-2&text=Marcin+Kaminski",
     "en": {
       "title": "AI Product Management (Spanish Edition)",

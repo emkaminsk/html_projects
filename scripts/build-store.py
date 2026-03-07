@@ -32,16 +32,15 @@ def generate_jsonld(products):
         p = product.get(DEFAULT_LANG, product.get("en"))
         schema = {
             "@context": "https://schema.org",
-            "@type": "Book",
+            "@type": "Product",
             "name": p["title"],
-            "author": {"@type": "Person", "name": "Marcin Kaminski"},
             "description": p["description"],
-            "url": product["kdpUrl"],
             "image": f"{BASE_URL}/{product['image']}",
-            "inLanguage": DEFAULT_LANG,
-            "bookFormat": "EBook",
+            "brand": {"@type": "Person", "name": "Marcin Kaminski"},
             "offers": {
                 "@type": "Offer",
+                "price": product.get("price", "9.99"),
+                "priceCurrency": product.get("currency", "USD"),
                 "availability": "https://schema.org/InStock",
                 "url": product["kdpUrl"],
             },
