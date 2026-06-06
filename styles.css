@@ -892,10 +892,11 @@ h2 i {
     width: 250px;
     background: white;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    z-index: 1000;
+    z-index: 1075;
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
-    padding-top: 4rem;
+    padding-top: 1rem;
+    overflow-y: auto;
 }
 
 .sidebar.active {
@@ -922,29 +923,51 @@ h2 i {
     .container {
         padding-left: 0;
     }
-    
-    .navbar-toggler {
-        position: fixed;
-        top: 1rem;
-        left: 1rem;
-        z-index: 1001;
-        background: white;
-        border: none;
-        padding: 0.5rem 0.75rem;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        cursor: pointer;
-        font-size: 1.5rem;
+}
+
+#menuToggle {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1100;
+    background: white;
+    border: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    transition: var(--transition-fast);
+    line-height: 1;
+}
+
+#menuToggle:hover {
+    background: var(--accent-color);
+    color: white;
+    box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 768px) {
+    #menuToggle {
         display: block;
-        color: var(--primary-color);
     }
 }
 
-/* Desktop styles */
-@media (min-width: 769px) {
-    .navbar-toggler {
-        display: none;
-    }
+#sidebarBackdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1050;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#sidebarBackdrop.active {
+    display: block;
+    opacity: 1;
 }
 
 .main-grid {
@@ -976,7 +999,7 @@ h2 i {
 
 /* Sidebar menu styling */
 .sidebar .navbar-nav {
-    padding: 0.5rem;
+    padding: 1rem 0.5rem;
 }
 
 .sidebar .navbar-nav li {

@@ -15,35 +15,51 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initializeSidebar() {
-    const menuToggle = document.querySelector('#menuToggle');
     const sidebar = document.querySelector('.sidebar');
-    
-    // Ensure elements exist before adding listeners
-    if (!menuToggle || !sidebar) {
-        console.error('Required elements not found');
+
+    if (!sidebar) {
+        console.error('Sidebar element not found');
         return;
     }
 
-    // Handle menu toggle click
-    menuToggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        sidebar.classList.toggle('active');
-        
-        // Update aria-expanded state
-        const isExpanded = sidebar.classList.contains('active');
-        menuToggle.setAttribute('aria-expanded', isExpanded.toString());
-    });
+    // Create hamburger button outside the sidebar so CSS transform on sidebar
+    // doesn't affect button's fixed positioning on mobile.
+    const menuToggle = document.createElement('button');
+    menuToggle.id = 'menuToggle';
+    menuToggle.setAttribute('aria-label', 'Toggle navigation');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+    document.body.appendChild(menuToggle);
 
-    // Close sidebar when clicking outside on mobile
-    document.addEventListener('click', (e) => {
-        if (window.innerWidth <= 768) {
-            if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
-                sidebar.classList.remove('active');
-                menuToggle.setAttribute('aria-expanded', 'false');
-            }
+    // Create backdrop overlay for mobile
+    const backdrop = document.createElement('div');
+    backdrop.id = 'sidebarBackdrop';
+    document.body.appendChild(backdrop);
+
+    const closeSidebar = () => {
+        sidebar.classList.remove('active');
+        backdrop.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+    };
+
+    const openSidebar = () => {
+        sidebar.classList.add('active');
+        backdrop.classList.add('active');
+        menuToggle.setAttribute('aria-expanded', 'true');
+        menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+    };
+
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (sidebar.classList.contains('active')) {
+            closeSidebar();
+        } else {
+            openSidebar();
         }
     });
+
+    backdrop.addEventListener('click', closeSidebar);
 
     // Handle window resize
     let resizeTimer;
@@ -51,8 +67,7 @@ function initializeSidebar() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
             if (window.innerWidth > 768) {
-                sidebar.classList.remove('active');
-                menuToggle.setAttribute('aria-expanded', 'false');
+                closeSidebar();
             }
         }, 250);
     });
