@@ -1,0 +1,16 @@
+{
+  "name": "Marcin Kamiński | Senior Consultant & Product Manager",
+  "short_name": "MK Home",
+  "description": "Senior Consultant, Product Manager, and tech enthusiast. Explore my portfolio, digital store, and side projects.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2c3e50",
+  "theme_color": "#667eea",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1009,7 +1009,9 @@ h2 i {
 .sidebar .navbar-nav a {
     color: var(--text-color);
     text-decoration: none;
-    display: block;
+    display: flex;
+    align-items: center;
+    min-height: 48px;
     padding: 0.25rem 0.5rem;
     transition: color 0.3s ease;
 }
@@ -1052,6 +1054,7 @@ h2 i {
     font-size: 0.95em;
     color: var(--text-color);
     opacity: 0.9;
+    min-height: 48px;
 }
 
 .sidebar .submenu a:hover {
@@ -1082,4 +1085,13 @@ h2 i {
 
 .project-item:hover h2 i {
     transform: scale(1.2);
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.875rem;
+    color: #6c757d;
+    border-top: 1px solid #dee2e6;
+    margin-top: 2rem;
 }

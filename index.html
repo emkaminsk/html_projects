@@ -7,6 +7,10 @@
     <meta name="description" content="Marcin Kamiński — Senior Consultant, Product Manager, and tech enthusiast. Explore my portfolio, digital store, and side projects.">
     <meta name="author" content="Marcin Kaminski">
     <link rel="canonical" href="https://mkhome.byst.re/index.html">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="robots" content="index,follow">
     <meta property="og:title" content="Marcin Kamiński | Senior Consultant & Product Manager">
     <meta property="og:description" content="Senior Consultant, Product Manager, and tech enthusiast. Explore my portfolio, digital store, and side projects.">
     <meta property="og:url" content="https://mkhome.byst.re/index.html">
@@ -16,9 +20,28 @@
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Marcin Kamiński",
+      "url": "https://mkhome.byst.re/",
+      "jobTitle": "Senior Consultant & Product Manager",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Sii Polska",
+        "url": "https://sii.pl/"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/marcinkaminski/",
+        "https://github.com/emkaminsk"
+      ]
+    }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -167,27 +190,30 @@
                 <div class="interests-grid">
                     <div class="interest-item">
                         <i class="fas fa-language"></i>
-                        <h4>Spanish Language</h4>
+                        <h3>Spanish Language</h3>
                         <p>Expanding cultural horizons through language learning</p>
                     </div>
                     <div class="interest-item">
                         <i class="fab fa-python"></i>
-                        <h4>Python Programming</h4>
+                        <h3>Python Programming</h3>
                         <p>Building technical skills through hands-on coding</p>
                     </div>
                     <div class="interest-item">
                         <i class="fas fa-robot"></i>
-                        <h4>AI Trends</h4>
+                        <h3>AI Trends</h3>
                         <p>Staying ahead of technological innovation</p>
                     </div>
                     <div class="interest-item">
                         <i class="fas fa-dharmachakra"></i>
-                        <h4>Vipassana Meditation</h4>
+                        <h3>Vipassana Meditation</h3>
                         <p>Cultivating mindfulness and mental clarity</p>
                     </div>
                 </div>
             </section>
         </main>
+        <footer>
+            <p>&copy; 2025 Marcin Kamiński. All rights reserved.</p>
+        </footer>
     </div>
 
     <!-- Back to Top Button -->
