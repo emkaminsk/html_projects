@@ -1089,7 +1089,7 @@ h2 i {
 
 footer {
     text-align: center;
-    padding: 1.5rem;
+    padding: 1.5rem 0;
     font-size: 0.875rem;
     color: #6c757d;
     border-top: 1px solid #dee2e6;
