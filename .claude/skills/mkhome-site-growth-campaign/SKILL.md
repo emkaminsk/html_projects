@@ -7,7 +7,8 @@ description: >
   anything new on the site. Covers the full path from empty file to verified production URL
   without breaking SEO, navigation, or the visual identity. Routes every merge through
   mkhome-change-control. This is the flagship growth skill; sibling skills hold the
-  domain detail it delegates to.
+  domain detail it delegates to — for price/text edits to an EXISTING product (no new
+  product), load mkhome-store-pipeline directly instead.
 ---
 
 # mkhome-site-growth-campaign
@@ -134,8 +135,11 @@ do NOT copy it (Fence F2). Use the `index.html` pattern instead:
 - before GoatCounter: `<script src="script.js"></script>`
 - delete the jQuery/Bootstrap-JS `<script>` tags and the inline `$(document).ready` block.
 
-Head contract — change EVERY one of these (verify the full list against `index.html`, the
-canonical donor head, as of 2026-07-05):
+Head contract — change EVERY one of these. This is the operational checklist only; the
+canonical contract (tag semantics, why each exists, incident history) is
+**mkhome-seo-reference §1** — if the two ever disagree, seo-reference wins and this table
+gets fixed. Verify the full list against `index.html`, the canonical donor head
+(as of 2026-07-05):
 
 | Field | Rule |
 |---|---|
@@ -301,9 +305,10 @@ output, the change is not done.
 - The 0860584 price drift (JSON-LD 9.99 vs products.json 10.49) was live and reproduced in
   scratch on 2026-07-05; once someone reruns the build and commits, A4's "corrective churn"
   note becomes historical.
-- Validation scripts under `.claude/skills/mkhome-validation-and-qa/scripts/` were being
-  authored in parallel on 2026-07-05; if a path 404s, check that skill's directory and
-  update the three invocations here.
+- Validation scripts verified present and runnable 2026-07-05 at
+  `.claude/skills/mkhome-validation-and-qa/scripts/` (`check_invariants.py`,
+  `check_store_sync.py`, `smoke_serve.py`); if a path ever 404s, check that skill's
+  directory and update the three invocations here.
 - Re-verify after: changes to `scripts/build-store.py` (sitemap priorities, markers),
   completion of the jQuery removal debt (B1 donor guidance simplifies), any new donor page,
   or a change to the head contract in `index.html`.

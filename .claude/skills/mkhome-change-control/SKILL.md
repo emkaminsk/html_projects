@@ -181,7 +181,7 @@ not apply to this repo. Do not follow it.
 
 All facts verified 2026-07-05 against the working tree. Re-verify before relying on them:
 
-- Deploy-on-push-to-main: `cat .github/workflows/deploy.yml` (note: server runs `git pull mkhome`).
+- Deploy-on-push-to-main: `cat .github/workflows/deploy.yml` (server script is `cd gitrepos/html_projects && git pull`).
 - Brand variables/gradient: `grep -n "accent-color\|Lato" styles.css | head -5` (lines 10–11, 35 as of 2026-07-05).
 - SEO markers in store.html: `grep -n "SEO:" store.html`.
 - build-store behavior (markers, idempotence, sitemap lastmod=today): `sed -n '94,129p' scripts/build-store.py` and README section "Build Scripts".

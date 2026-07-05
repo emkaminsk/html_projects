@@ -104,11 +104,11 @@ shape (first product, abridged URL):
 Edit `store/products.json`, then regenerate (`python3 scripts/build-store.py`). Hand edits
 are silently overwritten by the next build, and skipping the build causes drift.
 
-**Live drift example (as of 2026-07-05):** commit `0860584` ("Price update") changed the
-it-for-seniors price to `"10.49"` in products.json, but build-store.py was not re-run, so
-store.html's generated JSON-LD still advertises `"price": "9.99"`. Google may flag or ignore
-structured data whose price disagrees with reality. If you touch the store, run the build
-and commit the regenerated store.html + sitemap.xml alongside products.json.
+**SEO consequence of skipping the build:** Google may flag or ignore structured data whose
+price disagrees with reality. A live instance of this drift exists as of 2026-07-05
+(committed JSON-LD 9.99 vs products.json 10.49) — the full story, remedy, and automated
+detection live in **mkhome-store-pipeline** (failure modes) and `check_store_sync.py` in
+**mkhome-validation-and-qa**.
 
 ## 3. hreflang: single-URL for all languages (known compromise)
 

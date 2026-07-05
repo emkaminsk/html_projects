@@ -32,6 +32,7 @@ Deploy = push to `main` → GitHub Action SSHes to the VPS and runs `git pull`. 
 | Setting up venv/Pillow/local server | mkhome-build-and-env |
 | Deploy mechanics, nginx changes | mkhome-deploy-and-operate |
 | Proving a fix works (evidence standards) | mkhome-validation-and-qa |
+| Need DOM/geometry/screenshot/header PROOF of a behavior | mkhome-analysis-toolkit |
 
 ## Symptom → triage index
 
@@ -41,7 +42,7 @@ Deploy = push to `main` → GitHub Action SSHes to the VPS and runs `git pull`. 
 | 2 | Hamburger missing/unreachable on mobile | transform trap, or script.js never ran |
 | 3 | Production shows stale CSS/JS after deploy | 1h nginx cache vs browser cache vs deploy didn't run |
 | 4 | Store page blank (no products) | products.json fetch failed or JSON syntax error |
-| 5 | Store shows wrong language | localStorage `storeLang` persisted from earlier visit |
+| 5 | Store shows wrong language | Browser: stale localStorage `storeLang`. Crawler/curl: Spanish-by-design, or missing `es` object falling back to `en` |
 | 6 | Social preview wrong/blurry | OG tags/dims, validator cache, low-res og-image.png |
 | 7 | Mojibake / broken diacritics (Ã³, Å„, �) | non-UTF-8 write somewhere in the pipeline |
 | 8 | Page renders unstyled | tool pages have no styles.css — probably NOT a bug |
@@ -65,7 +66,7 @@ First: `grep -n 'menuToggle' index.html store.html sidebar.html` → **expected:
 
 ### 3. Production shows stale CSS/JS after deploy
 Three suspects, in order:
-1. **Did the deploy run?** `gh run list --limit 5` (workflow "Deploy to VPS", triggers on push to main). Failed/absent run → redeploy; nothing below matters.
+1. **Did the deploy run?** `gh run list --limit 5` if the `gh` CLI exists; otherwise use the GitHub MCP `actions_list` tool or the repo's Actions tab (see mkhome-deploy-and-operate §2). Workflow "Deploy to VPS", triggers on push to main. Failed/absent run → redeploy; nothing below matters.
 2. **nginx/edge cache?** `curl -sI https://mkhome.byst.re/styles.css` → expect `Cache-Control: public, max-age=3600` and `expires` ~1h ahead. Then `curl -s "https://mkhome.byst.re/styles.css?v=$(date +%s)" | grep -n "<the new rule>"` — a query string busts caches. **New content with `?v=` but old without → it's cache; wait ≤1h or accept it.**
 3. **Browser cache?** Hard-reload (Ctrl+Shift+R) or compare `curl` output vs what DevTools shows. curl fresh + browser stale → browser.
 If even `?v=`-busted curl shows old content, the file on the VPS is old: deploy ran but `git pull` failed (dirty tree on VPS) — see mkhome-deploy-and-operate.
@@ -77,7 +78,9 @@ First: `python3 -m json.tool store/products.json > /dev/null && echo OK` → **`
 - Note: the `<noscript>` Spanish cards between `<!-- SEO:NOSCRIPT -->` markers are static build output — them being fine while the page is blank confirms a client-side JS/fetch failure.
 
 ### 5. Store shows wrong language
-First: in DevTools console on store.html run `localStorage.getItem('storeLang')`. The switcher persists to that key; default is `'en'` only when the key is absent. **A stale `'pl'`/`'es'` value fully explains "always opens in Polish".** `localStorage.removeItem('storeLang')` and reload to confirm. Not a bug unless the value changes without a user click.
+First, split the symptom — wrong language **in a browser** vs **in search results / curl output** are different mechanisms:
+- **In a browser:** in DevTools console on store.html run `localStorage.getItem('storeLang')`. The switcher persists to that key; default is `'en'` only when the key is absent. **A stale `'pl'`/`'es'` value fully explains "always opens in Polish".** `localStorage.removeItem('storeLang')` and reload to confirm. Not a bug unless the value changes without a user click.
+- **In search results / curl (crawler view):** crawlers see only the generated noscript/JSON-LD blocks, which are Spanish **by design** (`DEFAULT_LANG = "es"` in `scripts/build-store.py`) — but a product missing its `es` object **silently falls back to `en`**. Check: `curl -s https://mkhome.byst.re/store.html | sed -n '/SEO:NOSCRIPT/,/\/SEO:NOSCRIPT/p'` and read the language. English where Spanish is expected → missing `es` object → mkhome-store-pipeline (failure modes). Why es-for-crawlers/en-for-clients is intentional → mkhome-seo-reference §7.
 
 ### 6. Social preview wrong or blurry
 First: `curl -s https://mkhome.byst.re/store.html | grep -o '<meta property="og:[^>]*>'` → expect `og:image` = `https://mkhome.byst.re/store/assets/og-image.png` (absolute URL) plus `og:image:width` 1200 / `og:image:height` 630.

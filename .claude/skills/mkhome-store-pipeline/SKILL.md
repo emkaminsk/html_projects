@@ -7,6 +7,8 @@ description: >
   regenerating the OG image; or investigating why store.html's JSON-LD / noscript content
   disagrees with products.json. Covers the products.json field catalog, the build-store.py
   generation contract (markers, idempotency, DEFAULT_LANG), and known failure modes.
+  Owns the mechanics; the end-to-end gate sequence for launching a NEW product is
+  mkhome-site-growth-campaign Track A, which delegates here.
 ---
 
 # mkhome store pipeline

@@ -62,7 +62,7 @@ milestone → invariants and skills touched.
 ## F3. CI-gated validation on PRs — `OPEN` — **highest leverage**
 
 - **Falls short (as of 2026-07-05):** the only workflow, `.github/workflows/deploy.yml`, does `git pull` on the VPS on push to main. No check ever blocks a bad merge. Validation scripts (sibling skill `mkhome-validation-and-qa`, `.claude/skills/mkhome-validation-and-qa/scripts/`) run only when a session remembers to run them. Zero-human-review shipping is impossible while merging is unguarded.
-- **Asset:** the validation scripts exist as of today — CI is wiring, not authorship. (Verify the scripts directory exists before writing the workflow; the sibling skill may still be landing.)
+- **Asset:** the validation scripts exist (verified 2026-07-05: `check_invariants.py`, `check_store_sync.py`, `smoke_serve.py` under `.claude/skills/mkhome-validation-and-qa/scripts/`, all exiting non-zero on FAIL) — CI is wiring, not authorship.
 - **First three steps:** (1) list the scripts and confirm each exits non-zero on failure (a CI gate needs exit codes, not prose); (2) write `.github/workflows/validate.yml` triggered on `pull_request`, running each script; (3) prove the gate: open a PR that deliberately breaks an invariant (e.g. delete `id="sidebar"` from `index.html`) and confirm a red check, then close it unmerged.
 - **Milestone:** a PR with a deliberately broken invariant gets a red check; a clean PR gets green. The red-check PR is the proof artifact — link it in the adoption record.
 - **Touches:** main-is-production invariant (`mkhome-change-control` — this ADDS a guard, changes no site file); `mkhome-deploy-and-operate` (workflow anatomy); `mkhome-validation-and-qa` (the scripts themselves).
@@ -175,6 +175,9 @@ next session everything it cost you.
 
 ## Worked example — the hamburger fix (settled case, PR #1 / commit 8b05870)
 
+Canonical incident record: **mkhome-failure-archaeology** entry 1 (facts live there;
+this section maps those facts onto the five method steps).
+
 **Label: this is a reconstruction** from the commit message and diff of
 8b05870 ("Fix mobile navigation: move hamburger button outside sidebar",
 2026-06-06, merged as PR #1 in 01136cc) — the method is being retro-fitted onto
@@ -222,7 +225,7 @@ Before acting on any frontier item, re-check it is still open:
 
 - **F1 (jQuery/sidebar):** `grep -rn "jquery" /home/user/html_projects/*.html` — empty ⇒ done. Two mechanisms: `grep -n 'class="sidebar"' *.html` (mixed `<div>`/`<nav id="sidebar">` ⇒ still split).
 - **F2 (SRI/CSP):** `grep -c integrity *.html` (all 0 ⇒ open) and `grep -rn "Content-Security-Policy" *.html` (empty ⇒ open).
-- **F3 (CI gate):** `ls .github/workflows/` — only `deploy.yml` ⇒ open. Also confirm scripts exist: `ls .claude/skills/mkhome-validation-and-qa/scripts/` (dir was still landing on 2026-07-05 — verify before citing).
+- **F3 (CI gate):** `ls .github/workflows/` — only `deploy.yml` ⇒ open. Scripts: `ls .claude/skills/mkhome-validation-and-qa/scripts/` (all three present as of 2026-07-05).
 - **F4 (heads):** `grep -L "charset" json_prettifier.html morse_converter.html qr_code_generator.html` (any output ⇒ charset gap remains); `grep -n "og:image" *.html | grep -v store/assets` (empty ⇒ og:image drift remains — all pages still point at the store image).
 - **F5 (multilingual):** `grep -n hreflang store.html` — all four alternates same URL ⇒ open; `ls store.en.html 2>/dev/null` or equivalent per-language pages ⇒ done.
 - **F6 (cache-busting):** `grep -n "?v=" *.html` (empty ⇒ open); nginx comment at `.deploy/mkhome` line ~26.

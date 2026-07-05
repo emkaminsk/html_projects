@@ -180,5 +180,5 @@ description: >-
 - README venv gap: re-verify with `grep -n venv README.md .gitignore && ls venv` — gap exists while README lacks a `python3 -m venv` line and `venv/` is absent (as of 2026-07-05).
 - License type: re-verify with `head -3 LICENSE` (Apache 2.0 as of 2026-07-05).
 - Commit-style examples (`0fc1ba1`, `1285d55`, `8b05870`): re-verify with `git log --format='%h %s' -20` and `git show -s --format=%B 0fc1ba1` (as of 2026-07-05).
-- Skill inventory (13 mkhome-* skills): re-verify with `ls .claude/skills/` (as of 2026-07-05; some siblings may still be in-flight PRs).
+- Skill inventory (13 mkhome-* skills): re-verify with `ls .claude/skills/` (all 13 present as of 2026-07-05).
 - Build/venv commands quoted from README: re-verify with `sed -n '30,66p' README.md` (as of 2026-07-05).

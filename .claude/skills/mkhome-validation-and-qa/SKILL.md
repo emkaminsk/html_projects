@@ -141,8 +141,10 @@ Headless Chromium EXISTS at `/opt/pw-browsers` in this environment (verified 202
 
 ```bash
 python3 -m http.server 8123 --bind 127.0.0.1 &   # from repo root
-/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell \
-  --no-sandbox --disable-gpu --window-size=375,667 --virtual-time-budget=4000 \
+# Binary path floats across container versions — locate it, don't hardcode it:
+CHROME=$(find /opt/pw-browsers -type f \( -name headless_shell -o -name chrome \) | head -1)
+"$CHROME" \
+  --no-sandbox --disable-gpu --no-proxy-server --window-size=375,667 --virtual-time-budget=4000 \
   --dump-dom http://127.0.0.1:8123/index.html | grep -c 'id="menuToggle"'   # expect 1
 kill %1
 ```

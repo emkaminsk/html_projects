@@ -142,7 +142,8 @@ live: css/js → `expires 1h; Cache-Control "public, max-age=3600"`; images/font
 → 1w (`max-age=604800`); html → `expires -1; "no-cache, no-store,
 must-revalidate"`. If your container CAN reach production, prefer measuring.
 So a CSS change is visible at worst 1h after deploy; if it's older than that
-and still stale, the problem is not this cache layer.
+and still stale, the problem is not this cache layer. (Canonical home of the
+cache policy table + its incident history: **mkhome-deploy-and-operate** §3.)
 
 ## Recipe 4: Crawler's-eye view (no-JS HTML + JSON-LD validation)
 
