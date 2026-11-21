@@ -83,7 +83,7 @@ milestone → invariants and skills touched.
 - **Milestone:** `curl -s https://mkhome.byst.re/store.en.html | grep -c "<h2>"` (JS off) shows English product content; hreflang cluster validates; existing Spanish rich results still pass. **Obligation:** theory per `mkhome-seo-reference` + external validator proof, not vibes.
 - **Touches:** noscript-store and generated-blocks invariants (`mkhome-change-control` non-negotiables); sitemap (new URLs); `mkhome-store-pipeline`; `mkhome-seo-reference`.
 
-## F6. Cache-busting versioned assets — `OPEN`
+## F6. Cache-busting versioned assets — `IN PROGRESS` (2026-11-21: deploy-time `?v=<short-sha>` stamping via `scripts/stamp_assets.sh`; milestone below not yet proven; long max-age not adopted)
 
 - **Falls short (as of 2026-07-05):** `.deploy/mkhome` caches css/js 1h (`expires 1h`, line 28) and images 1w; line 26 is a comment saying "consider using versioning (styles.css?v=timestamp)" — never implemented. Every CSS/JS deploy has up to a 1-hour window where users (and verifying AI sessions) see stale assets; this has repeatedly wasted debugging time (see `mkhome-failure-archaeology`, stale-CSS entries).
 - **Asset:** the fix is named in the repo's own nginx config comment; if F4's head generator exists, stamping `?v=<content-hash>` on asset links is one function in the same script.
