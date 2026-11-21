@@ -22,6 +22,10 @@ function initializeSidebar() {
         return;
     }
 
+    // Highlight the link to the current page
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    sidebar.querySelectorAll(`a[href="${currentPage}"]`).forEach(link => link.classList.add('active'));
+
     // Create hamburger button outside the sidebar so CSS transform on sidebar
     // doesn't affect button's fixed positioning on mobile.
     const menuToggle = document.createElement('button');

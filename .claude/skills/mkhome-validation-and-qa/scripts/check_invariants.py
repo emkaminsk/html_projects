@@ -167,21 +167,14 @@ def check_visual_identity(root):
         emit("FAIL", f"visual-identity: styles.css lost non-negotiable token(s): {bad} — restore before merging (see mkhome-change-control)")
     else:
         emit("PASS", "visual-identity: styles.css has --accent-color #667eea, --accent-color-2 #764ba2, Lato")
-    # The Lato webfont <link> lives in page heads, not styles.css. As of
-    # 2026-07-05 only index.html and store.html actually load it;
-    # portfolio/projects/utilities declare 'Lato' via styles.css but never
-    # fetch the font (pre-existing gap -> WARN). Losing the link on
-    # index/store would be a NEW regression -> FAIL.
-    for page in ("index.html", "store.html"):
+    # The Lato webfont <link> lives in page heads, not styles.css. Since
+    # 2026-11-21 all five sidebar pages load it (portfolio/projects/utilities
+    # gap fixed in the sidebar restyle) -> losing it anywhere is a regression.
+    for page in ("index.html", "store.html", "portfolio.html", "projects.html", "utilities.html"):
         if "fonts.googleapis.com/css2?family=Lato" in read(root / page):
             emit("PASS", f"visual-identity: {page} loads the Lato webfont")
         else:
             emit("FAIL", f"visual-identity: {page} lost its Lato Google-Fonts link — restore it (visual identity is non-negotiable)")
-    for page in ("portfolio.html", "projects.html", "utilities.html"):
-        if "fonts.googleapis.com/css2?family=Lato" in read(root / page):
-            emit("PASS", f"visual-identity: {page} loads the Lato webfont (gap fixed — update this check's baseline)")
-        else:
-            emit("WARN", f"visual-identity: {page} never loads the Lato webfont (pre-existing gap as of 2026-07-05; styles.css asks for Lato but the page falls back to sans-serif — fix opportunistically)")
 
 
 def check_menu_toggle(root):
