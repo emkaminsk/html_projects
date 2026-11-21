@@ -28,16 +28,13 @@ None of them writes to the repo. `check_store_sync.py` copies store.html + sitem
 
 ### 1. check_invariants.py — static repo invariants
 
-Checks (all from `mkhome-architecture-contract`): head-metadata contract on the 5 main pages (title, meta description, meta author, canonical, og:image:width/height 1200/630, twitter:card, GoatCounter, html lang); GoatCounter on every root page; the 4 SEO markers exactly once each in store.html; sitemap.xml == root `*.html` minus sidebar.html; sidebar.html internal links resolve; products.json schema (6 top-level fields + title/subtitle/description/highlights/cta in en/es/pl, images exist); visual-identity tripwire (`--accent-color: #667eea`, `--accent-color-2: #764ba2`, Lato in styles.css, Lato webfont link on index/store); no static `id="menuToggle"` in any HTML (script.js must create it on `<body>` — transform containing-block trap, PR #1/8b05870, see `mkhome-failure-archaeology`); charset on main pages (missing charset on tool pages/sidebar = WARN, pre-existing).
+Checks (all from `mkhome-architecture-contract`): head-metadata contract on the 5 main pages (title, meta description, meta author, canonical, og:image:width/height 1200/630, twitter:card, GoatCounter, html lang); GoatCounter on every root page; the 4 SEO markers exactly once each in store.html; sitemap.xml == root `*.html` minus sidebar.html; sidebar.html internal links resolve; products.json schema (6 top-level fields + title/subtitle/description/highlights/cta in en/es/pl, images exist); visual-identity tripwire (`--accent-color: #667eea`, `--accent-color-2: #764ba2`, Lato in styles.css, Lato webfont link on all five sidebar pages); no static `id="menuToggle"` in any HTML (script.js must create it on `<body>` — transform containing-block trap, PR #1/8b05870, see `mkhome-failure-archaeology`); charset on main pages (missing charset on tool pages/sidebar = WARN, pre-existing).
 
-Expected output TODAY (2026-07-05) — 26 PASS elided, WARN/summary shown verbatim:
+Expected output TODAY (2026-11-21) — 29 PASS elided, WARN/summary shown verbatim:
 
 ```
 PASS: head-contract: index.html has full head-metadata contract
-... (25 more PASS lines) ...
-WARN: visual-identity: portfolio.html never loads the Lato webfont (pre-existing gap as of 2026-07-05; styles.css asks for Lato but the page falls back to sans-serif — fix opportunistically)
-WARN: visual-identity: projects.html never loads the Lato webfont (pre-existing gap as of 2026-07-05; styles.css asks for Lato but the page falls back to sans-serif — fix opportunistically)
-WARN: visual-identity: utilities.html never loads the Lato webfont (pre-existing gap as of 2026-07-05; styles.css asks for Lato but the page falls back to sans-serif — fix opportunistically)
+... (28 more PASS lines) ...
 WARN: charset: json_prettifier.html lacks <meta charset> (pre-existing gap; standalone tool page with minimal head by design; served UTF-8 by nginx — fix opportunistically, not blocking)
 WARN: charset: qr_code_generator.html lacks <meta charset> (pre-existing gap; standalone tool page with minimal head by design; served UTF-8 by nginx — fix opportunistically, not blocking)
 WARN: charset: morse_converter.html lacks <meta charset> (pre-existing gap; standalone tool page with minimal head by design; served UTF-8 by nginx — fix opportunistically, not blocking)
@@ -165,7 +162,7 @@ Known pre-existing findings (report, don't silently fix, don't hide):
 1. **FAIL — store price drift**: products.json says it-for-seniors = 10.49 (commit 0860584); committed store.html JSON-LD still says 9.99. Fix = re-run build-store.py as a deliberate store change.
 2. **WARN — tool-page heads**: json_prettifier.html, qr_code_generator.html, morse_converter.html lack `<meta charset>` and the full head contract; json_prettifier.html additionally has **no `<title>` at all** and qr_code_generator.html/morse_converter.html have **no `lang` attr on `<html>`** (found 2026-07-05, honest extras beyond the charset gap).
 3. **WARN — sidebar.html** lacks charset (include fragment; its head is never used).
-4. **WARN — Lato webfont never loaded on portfolio/projects/utilities**: styles.css declares `font-family: 'Lato'` but only index.html and store.html carry the Google Fonts `<link>`; the other three render the sans-serif fallback. Newly surfaced by this skill on 2026-07-05.
+4. ~~WARN — Lato webfont never loaded on portfolio/projects/utilities~~ — fixed 2026-11-21 (sidebar restyle); now a FAIL tripwire on all five pages.
 
 If your diff turns any WARN into a PASS, also update the baseline numbers here and the dated comments in the script.
 
