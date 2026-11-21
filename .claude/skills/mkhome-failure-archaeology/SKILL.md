@@ -68,7 +68,7 @@ Also note: the button now exists only at runtime — grepping HTML for `menuTogg
 
 **Final state (verified in `/home/user/html_projects/.deploy/mkhome` today):** css/js → `expires 1h`; images/fonts → `1w`; html → `no-cache, no-store, must-revalidate`. This IS the deployed policy.
 
-**Still open / candidate:** Versioned cache-busting (`styles.css?v=timestamp` + long max-age) is only a **comment** in the nginx file ("For production, consider using versioning…") and in the checklist's "Future Recommendation". Not implemented anywhere — no `?v=` query strings exist in the HTML. If a CSS change must be visible instantly, the procedure remains: purge Cloudflare cache (Dashboard → Caching → Purge) and hard-refresh; otherwise wait ≤1h.
+**Update 2026-11-21:** deploy-time `?v=<short-sha>` stamping added (`scripts/stamp_assets.sh`, called from `.github/workflows/deploy.yml`); the text below is the prior state. **Previously open:** Versioned cache-busting (`styles.css?v=timestamp` + long max-age) is only a **comment** in the nginx file ("For production, consider using versioning…") and in the checklist's "Future Recommendation". Not implemented anywhere — no `?v=` query strings exist in the HTML. If a CSS change must be visible instantly, the procedure remains: purge Cloudflare cache (Dashboard → Caching → Purge) and hard-refresh; otherwise wait ≤1h.
 
 ---
 

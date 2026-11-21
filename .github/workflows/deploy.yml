@@ -16,5 +16,10 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
+            set -e
             cd gitrepos/html_projects
-            git pull 
+            # Undo the previous deploy's cache-bust stamps so the pull sees a clean tree
+            git checkout -- '*.html'
+            git pull
+            # Cache-bust JS/CSS (Cloudflare + 1h nginx cache) with the commit short SHA
+            ./scripts/stamp_assets.sh "$(git rev-parse --short HEAD)" *.html 

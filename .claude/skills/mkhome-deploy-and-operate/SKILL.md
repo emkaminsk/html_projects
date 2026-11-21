@@ -88,7 +88,7 @@ curl -sI https://mkhome.byst.re/styles.css | grep -i cache-control
 | images/fonts (`jpg jpeg png gif ico svg woff woff2 ttf eot`) | 1w | `Cache-Control: public, max-age=604800` | Replacing an image under the same filename lags up to a week — prefer a new filename | Same incident; heavy assets rarely change |
 | `.html` | none | `Cache-Control: no-cache, no-store, must-revalidate` + `Pragma: no-cache` | HTML changes visible immediately after pull | Same incident; content freshness prioritized |
 
-Open candidate (NOT implemented): a comment in the nginx file suggests versioned query strings (`styles.css?v=timestamp` in the HTML references) plus longer cache. If ever implemented, that changes this whole table — update it.
+Cache-busting (since 2026-11-21): the deploy workflow runs `git checkout -- '*.html'`, `git pull`, then `scripts/stamp_assets.sh <short-sha> *.html`, so production HTML references `styles.css?v=<sha>` / `script.js?v=<sha>` and every deploy busts browser + Cloudflare caches. Consequence: the VPS checkout has stamped (modified) top-level `*.html` between deploys — expected, not drift. Never run the stamp script locally. Longer max-age is still a candidate; if adopted, update this table.
 
 ## 4. nginx config anatomy (`.deploy/mkhome`, repo copy, as of 2026-07-05)
 
